@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.container {
+    padding-top: 50px;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    margin-bottom: 10px;
+}
+
+#count {
+    padding: 5px;
+    width: 80px;
+}
+
+button {
+    padding: 5px;
+}
