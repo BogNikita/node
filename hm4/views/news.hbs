@@ -15,16 +15,28 @@
         <form action="/news" method="POST" id="form">
             <div class="wrapper">
                 <label for="select">Выберите новостоной сайт</label>
-                <select name="linkNews" form="form" id="select">
+                <select name="site" form="form" id="select">
                     <option value="">Выберите новостоной сайт</option>
+                    {{#ifCond site 1 }}
+                    <option selected="true" value="1">Яндекс</option>
+                    {{else}}
                     <option value="1">Яндекс</option>
+                    {{/ifCond}}
+                     {{#ifCond site 2 }}
+                    <option selected="true" value="2">Лента</option>
+                    {{else}}
                     <option value="2">Лента</option>
+                    {{/ifCond}}
+                     {{#ifCond site 3 }}
+                    <option selected="true" value="3">РБК</option>
+                    {{else}}
                     <option value="3">РБК</option>
+                    {{/ifCond}}
                 </select>
             </div>
             <div class="wrapper">
                 <label for="count">Выберете количество новостей</label>
-                <input id="count" type="number" value="1" min="1" name="value">
+                <input id="count" type="number" value="{{ count }}" min="1" name="count">
             </div>
             <button type="submit">Запросить</button>
         </form>
@@ -40,22 +52,5 @@
         {{/if}}
         
     </div>
-    <script>
-        let cookieSite, cookieValue;
-        const cookie = document.cookie.split('; ').forEach(item => {
-            if (item.includes('site')) {
-                cookieSite = item.slice(-1);
-            } else {
-                cookieValue = item.slice(-1)
-            };
-        });
-       
-        document.querySelectorAll('option').forEach(item => {
-            if (item.value == cookieSite) {
-                item.setAttribute('selected', true)
-            }
-        });
-        document.querySelector('#count').value = cookieValue;
-    </script>  
 </body>
 </html>
