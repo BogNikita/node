@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">
+            Новости на сегодня
+        </h2>
+        <form action="/news" method="POST" id="form">
+            <div class="wrapper">
+                <label for="select">Выберите новостоной сайт</label>
+                <select name="linkNews" form="form" id="select">
+                    <option value="">Выберите новостоной сайт</option>
+                    <option value="1">Яндекс</option>
+                    <option value="2">Лента</option>
+                    <option value="3">РБК</option>
+                </select>
+            </div>
+            <div class="wrapper">
+                <label for="count">Выберете количество новостей</label>
+                <input id="count" type="number" value="1" min="1" name="value">
+            </div>
+            <button type="submit">Запросить</button>
+        </form>
+        {{#if error }}
+        <h1>Ошибка: {{ error }}</h1>
+        {{else}}
+        <ul>
+            Новости:
+            {{#each news}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        
+    </div>
+    <script>
+        let cookieSite, cookieValue;
+        const cookie = document.cookie.split('; ').forEach(item => {
+            if (item.includes('site')) {
+                cookieSite = item.slice(-1);
+            } else {
+                cookieValue = item.slice(-1)
+            };
+        });
+       
+        document.querySelectorAll('option').forEach(item => {
+            if (item.value == cookieSite) {
+                item.setAttribute('selected', true)
+            }
+        });
+        document.querySelector('#count').value = cookieValue;
+    </script>  
+</body>
+</html>
