@@ -1,11 +1,5 @@
 const mysql = require('mysql2');
 const options = require('./config');
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
 
 const pool = mysql.createPool(options).promise();
