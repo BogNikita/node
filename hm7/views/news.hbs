@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">
+            Новости на сегодня
+        </h2>
+        <form action="/news" method="POST" id="form">
+            <div class="wrapper">
+                <label for="select">Выберите новостоной сайт</label>
+                <select name="site" form="form" id="select">
+                    <option value="">Выберите новостоной сайт</option>
+                    {{#ifCond site 1 }}
+                    <option selected="true" value="1">Яндекс</option>
+                    {{else}}
+                    <option value="1">Яндекс</option>
+                    {{/ifCond}}
+                     {{#ifCond site 2 }}
+                    <option selected="true" value="2">Лента</option>
+                    {{else}}
+                    <option value="2">Лента</option>
+                    {{/ifCond}}
+                     {{#ifCond site 3 }}
+                    <option selected="true" value="3">РБК</option>
+                    {{else}}
+                    <option value="3">РБК</option>
+                    {{/ifCond}}
+                </select>
+            </div>
+            <div class="wrapper">
+                <label for="count">Выберете количество новостей</label>
+                <input id="count" type="number" value="{{ count }}" min="1" name="count">
+            </div>
+            <button type="submit">Запросить</button>
+        </form>
+        {{#if error }}
+        <h1>Ошибка: {{ error }}</h1>
+        {{else}}
+        <ul>
+            Новости:
+            {{#each news}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        <a href="/">Назад</a>
+    </div>
+</body>
+</html>
