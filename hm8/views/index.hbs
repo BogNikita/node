@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="/auth/login/">Войти</a>
+        <a href="/auth/signup/">Зарегистрироваться</a>
+        <a href="/news/">Новости</a>
+        <a href="/task/">Список дел</a>
+        <a href="/chat/">Чат</a>
+        <form method="POST" action="/auth/logout/">
+            <button type="submit">Выйти</button>
+        </form>
+        {{#if name}}
+        <h2>Привет {{name}}</h2>
+        {{/if}}
+        <ul id="online">
+            Пользователи онлайн:
+        </ul>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+       
+        socket.on('connection', function (data) {
+        const userElems = document.getElementById('online');
+        let listUser = 'Пользователи онлайн:';
+        userElems.innerHTML = listUser;
+        data.forEach(user => {
+            listUser += `<li>${user}</li>`
+            })
+        userElems.innerHTML = listUser;
+        });
+            
+    </script>
+</body>
+
+</html>

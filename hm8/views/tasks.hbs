@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <h1>Список дел</h1>
+        {{#each tasks}}
+            <h2>{{this.task}}</h2>
+            <p>{{this.description}}</p>
+            <form action="/task/ {{this.id}}/description/" method="POST">
+                <label for="">Изменить описание</label>
+                <input type="text" name="description" placeholder="Введите описание">
+                <button type="submit">Подтвердить изменени</button>
+            </form>
+            <span>Состояние {{this.complete}}</span>
+            <form action="/task/ {{this.id}}/complete" method="post">
+                <button type="submit" name="complete" value="{{not this.complete}}">Выполнить</button>
+            </form>
+            <form action="/task/{{this.id}}/delete" method="post">
+                <button type="submit">Удалить задачу</button>
+            </form>
+        {{/each}}
+        <form action="/task/" method="post">
+            <label for="task">Задача</label>
+            <input type="text" name="task" placeholder="Введите название задачи">
+            <label for="description">Описание задачи</label>
+            <input type="text" name="description" placeholder="Введите описание задачи">
+            <button type="submit">Сохранить задачу</button>
+        </form>
+        <a href="/">Выйти</a>
+    </div>
+</body>
+</html>
